@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>产品自动化测试平台</title>
+</head>
+<body role="document">
+    <!--导航栏-->
+    <nav class="navbar navbar-ecpand-sm bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">&nbsp;</a>
+            <ul class="nav justify-contant-center">
+                <li class=><a style="color: white;" href="/apitest_manage/">流程接口测试用例</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li class="active"><a style="color: white;" href="/apistep_manage/">流程接口测试步骤</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li class="active"><a style="color: white;" href="/apis_manage/">单一接口测试用例</a> </li>
+            </ul>
+            <ul class="nav justify-content-end">
+                <li class="nav-link"><a style="color: white;" href="#">{{ user }}</a></li>
+                <li class="nav-link"><a style="color: white;" href="/logout/">退出</a> </li>
+            </ul>
+        </div>
+    </nav>
+    <!--搜索栏-->
+    <div class="page-header" style="padding-top: 70px;">
+        <form class="navbar-form" method="get" action="/apisearch/">
+            {% csrf_token %}
+            <input type="search" name="apitestname" placeholder="名称" required>
+            <button type="submit">搜索</button>
+        </form>
+    </div>
+    <!--流程接口列表-->
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-11">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th><th>产品</th><th>流程接口测试用例名称</th><th>流程接口描述</th><th>测试负责人</th><th>测试结果</th><th>测试用例步骤</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for apitest in apitests %}
+                <tr>
+                    <td>{{ apitest.id }}</td>
+                    <td>{{ apitest.Product.productname }}</td>
+                    <td>{{ apitest.apttestname }}</td>
+                    <td>{{ apitest.apitestdesc }}</td>
+                    <td>{{ apitest.apitester }}</td>
+                    <td>{{ apitest.apitestresult }}</td>
+                    <td>{{ apitest.Apistep.apiteststep }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

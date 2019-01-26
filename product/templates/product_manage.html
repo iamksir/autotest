@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>产品自动化测试管理平台</title>
+</head>
+<body role="document">
+    <!--导航栏-->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="$">&nbsp;</a>
+            <ul class="nav justify-conttent-center">
+            </ul>
+            <ul class="nav justify-conttent-end">
+                <li class="nav-link"><a style="color:white" href="#">{{ user }}</a> </li>
+                <li class="nav-link"><a style="color:white" href="/logout/">退出</a> </li>
+            </ul>
+        </div>
+    </nav>
+    <!--搜索栏-->
+    <div class="page-header" style="padding-top: 70px;">
+        <form class="navbar-form" method="get" action="/productsearch/">
+            {% csrf_token %}
+            <input type="search" name="apitestname" placeholder="名称" required>
+            <button type="submit">搜索</button>
+        </form>
+    </div>
+    <!--产品列表-->
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-11">
+            <table class="table table-striped">
+                <thead>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <th>ID</th><tth>产品名称</tth><th>产品描述</th><th>产品负责人</th><th>创建时间</th
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.productname }}</td>
+                    <td>{{ product.productdesc }}</td>
+                    <td>{{ product.producter }}</td>
+                    <td>{{ product.create_time }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
