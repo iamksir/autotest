@@ -36,4 +36,8 @@ urlpatterns = [
     path('webcase_manage/',webviews.webcase_manage),
     path('webcasestep_manage/',webviews.webcasestep_manage),
     path('apisearch/',views.apisearch),
+    path('productsearch/',proviews.productsearch),
+    path('apissearch/',views.apissearch),
+    path('websearch/',webviews.websearch),
+    path('webstepsearch/',webviews.webstepsearch),
 ]
