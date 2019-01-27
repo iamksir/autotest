@@ -25,6 +25,36 @@
             <input type="search" name="bugname" placeholder="名称" required>
             <button type="submit">搜索</button>
         </form>
+    <!--翻页功能-->
+    <span style="position: absolute;right: 100px;bottom: 30px;"></span>
+    <div class="select2-container">
+        <ul class="paginator" id="pager">
+            {# 上一页链接开始 #}
+            {% if bugs.has_previous %}
+            {# 如果有上一页，则正常显示上一页链接 #}
+            <li class="calendarnav-previous"><a href="/bug_manage/?page={{ bugs.previous_page_number }}">上一页</a> </li>
+            {# 上一页标签 #}
+            {% else %}
+            <li class="calendarnav-previous disabled"><a href="#">上一页</a> </li>{# 如果当前不存在上一页，则上一页的链接不可单击 #}
+            {% endif %}
+            {# 上一页链接结束 #}
+        {% for num in bugs.paginator.page_range %}
+
+        {% if num == currentPage %}
+        <li class="item active"><a href="/bug_manage/?page={{ num }}">{{ num }}</a> </li>{# 显示当页数链接 #}
+        {% else %}
+        <li class="item"><a href="/bug_manage/?page={{ num }}">{{ num }}</a> </li>
+        {% endif %}
+        {% endfor %}
+        {# 下一页链接开始 #}
+        {% if bugs.has_next %}{# 如果有下一页，则正常显示下一页链接 #}
+        <li class="calendarnav-next"><a href="/bug_manage/?page={{ bugs.next_page_number }}">下一页</a> </li>
+        {% else %}
+        <li class="calendarnav-next disabled"><a href="#">下一页</a> </li>
+        {% endif %}
+        {# 下一页链接结束 #}
+        </ul>
+    </div>
     <!--bug列表-->
     <div class="row1" style="padding-top: 70px;">
         <div class="col-md-ll">

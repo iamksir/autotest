@@ -40,4 +40,5 @@ urlpatterns = [
     path('apissearch/',views.apissearch),
     path('websearch/',webviews.websearch),
     path('webstepsearch/',webviews.webstepsearch),
+    path('apistepsearch/',views.apistepsearch),
 ]
